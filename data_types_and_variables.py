@@ -3,7 +3,11 @@
 #Problem 1
 #You have rented some movies for your kids: The little mermaid (for 3 days), Brother Bear (for 5 days, they love it), and Hercules (1 day, you don't know yet if they're going to like it). If price for a movie per day is 3 dollars, how much will you have to pay?
 
-movies = [{'movie': 'The_little_mermaid', 'days': 3}, {'movie': 'Brother_Bear', 'days' : 5}, {'movie': 'Hercules', 'days': 1}]
+movies =    [
+            {'movie': 'The_little_mermaid', 'days': 3}, 
+            {'movie': 'Brother_Bear', 'days' : 5}, 
+            {'movie': 'Hercules', 'days': 1}
+            ]
 price_per_day = 3
 
 cost_per_movie = [day['days'] * price_per_day for day in movies ]
@@ -28,32 +32,51 @@ print(total_pay)
 #Problem 3
 #A student can be enrolled to a class only if the class is not full and the class schedule does not conflict with her current schedule.
 
+class_details = [
+                {'subject': 'Math','capacity': 20, 'enrolled': 15, 'day': 'Monday'}, 
+                {'subject': 'Science','capacity': 20, 'enrolled': 16, 'day': 'Tuesday'},
+                {'subject': 'English','capacity': 20, 'enrolled': 17, 'day': 'Wednesday'},
+                {'subject': 'Art','capacity': 20, 'enrolled': 18, 'day': 'Thursday'},
+                {'subject': 'History','capacity': 20, 'enrolled': 18, 'day': 'Thursday'},
+                {'subject': 'Economics','capacity': 20, 'enrolled': 20, 'day': 'Friday'},
+                {'subject': 'Art','capacity': 20, 'enrolled': 18, 'day': 'Saturday'},
+                {'subject': 'Computer Science','capacity': 20, 'enrolled': 12, 'day': 'Friday'}
+                ]
+
 student_schedule =  [
                     {'subject': 'Math', 'day': 'Monday'}, 
                     {'subject': 'Science','day': 'Tuesday'},
                     {'subject':'English', 'day': 'Wedensday'}
                     ]
 
-class_details = [
-                {'subject': 'Math','capacity': 20, 'enrolled': 15, 'day': 'Monday'}, 
-                {'subject': 'Science','capacity': 20, 'enrolled': 16, 'day': 'Tuesday'},
-                {'subject': 'English','capacity': 20, 'enrolled': 17, 'day': 'Wednesday'},
-                {'subject': 'Art','capacity': 20, 'enrolled': 18, 'day': 'Thursday'}
-                ]
+def student_should_take(classes, student):
+    can_take = []
+    for cap in classes: 
+        if cap['capacity'] > cap['enrolled']:
+            can_take.append(cap)    
+    
+    student_day = []    
+    for day in student:
+        student_day.append(day['day'])    
 
-def can_enroll(classes, student):
-    ce = []
-    for n, enroll in enumerate(classes): 
-        if enroll['capacity'] > enroll['enrolled']:
-            if enroll['subject'] != student['subject']:
-                ce = classes[n]['subject']
-    return ce
+    student_subject = []    
+    for subject in student:
+        student_subject.append(subject['subject'])    
 
+    should_take = []
+    for day in classes:
+        if day in can_take:        
+            if day['subject'] not in student_subject:
+                student_subject.append(day['subject'])
+                if day['day'] not in student_day:
+                    student_day.append(day['day'])
+                    should_take.append(day)
+                    
+    return [print(f'\nClass Available for Student:\n{avail_class}\n') for avail_class in should_take]
 
+student_should_take(class_details, student_schedule)
 
-print(can_enroll(class_details,student_schedule))
-
-#Currently does not run. My understanding is the exercise doesn't require running code at the moment so I will move on and return later to asses and finish.
+# Not sure why it has a list with None, None in it. I'm guessing it is has something to do with how the list comprehension is going through the list of dictionaries. 
 
 #Problem 4
 #A product offer can be applied only if people buy more than 2 items, and the offer has not expired. Premium members do not need to buy a specific amount of products.
