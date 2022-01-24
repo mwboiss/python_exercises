@@ -37,9 +37,11 @@ is_vowel(nvown)
 # Define a function named is_consonant. It should return True if the passed string is a consonant, False otherwise. Use your is_vowel function to accomplish this.
 
 def is_consonant(con):
-    if type(con)
-    if con.upper() in 'B, C, D, F, G, H, J, K, L, M, N, P, Q, R, S, T, V, W, X, Y, Z':
-        return True
+    if type(con) == str:    
+        if con.upper() in ['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z']:
+            return True
+        else:
+            return False
     else:
         return False
 
@@ -53,11 +55,13 @@ is_consonant(ncon)
 # Define a function that accepts a string that is a word. The function should capitalize the first letter of the word if the word starts with a consonant.
 
 def cap_con(word):
-    if word[0].upper() in 'B, C, D, F, G, H, J, K, L, M, N, P, Q, R, S, T, V, W, X, Y, Z':
-        return word.capitalize()
+    if type(word) == str:
+        if word[0].upper() in 'B, C, D, F, G, H, J, K, L, M, N, P, Q, R, S, T, V, W, X, Y, Z':
+            return word.capitalize()
+        else:
+            return word
     else:
-        return word
-    
+        return False    
 word = 'hamsandwich'
 other = 'apple'
     
@@ -229,6 +233,7 @@ print(sayhello("World"))
 
 def twelveto24(time_string):
     helper_list = []
+    time_string = time_string.lower()
     if time_string[-2:] == 'am':
         time_string = time_string[:-2]
     elif time_string[-2:] == 'pm':
@@ -260,7 +265,11 @@ def col_index(col_name):
     
 
 col_index('A')
-col_index('BB')
 col_index('AA')
 col_index('AAA')
+col_index('AAAA')
+col_index('BB')
+col_index('BBB')
+col_index('BBBB')
+col_index('CDA')
 col_index('ABCDEF')
